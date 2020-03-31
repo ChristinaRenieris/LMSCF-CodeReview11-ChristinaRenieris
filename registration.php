@@ -142,7 +142,7 @@
                         <button type="submit" class="btn btn-secondary" name="btn-signup">Sign-Up</button>
                     </div>
                         <hr/>
-                        <a class="text-white" href="index.php">Sign in Here...</a>
+                        <a class="text-white" href="index.php">Log in Here...</a>
                 </form>
             </div>
         </div>

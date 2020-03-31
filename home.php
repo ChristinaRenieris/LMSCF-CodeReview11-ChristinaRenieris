@@ -30,7 +30,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-            <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <style>
             .navbar,
             #footer{
@@ -94,13 +95,13 @@
             </ul>
 
             <form class="form-inline my-2 my-lg-0 col-4">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" type="text" name="search_animals" id="search_animals" placeholder="Search Animals" aria-label="Search">
                 <a class="btn btn-outline-secondary my-2 my-sm-0" href="logout.php?logout">Log Out</a>
             </form>
 
         </nav>
         <div class="container-fluid">
-            <div class="row mt-5">
+            <div  id="result" class="row mt-5">
                 <?php
                     $sql = "SELECT * FROM `animal`";
                     $result = mysqli_query($conn, $sql);
@@ -114,11 +115,12 @@
                     else {
                         $rows = $result->fetch_all(MYSQLI_ASSOC);
                         $rowsL = $resultL->fetch_all(MYSQLI_ASSOC);
+
                         foreach ($rows as $key =>$value) {
                             foreach ( $rowsL as $key=>$valueL) {
                                 $Location = '   <li>Location : '.$valueL["name"].'</li>
                                                 <li>City : '.$valueL["city"].'</li>
-                                                <li>ZIP-code :'.$valueL["ZIP_code"].'</li>
+                                                <li>ZIP-code : '.$valueL["ZIP_code"].'</li>
                                                 <li>Address : '.$valueL["address"].'</li>
                                             ';
                             }
@@ -197,5 +199,36 @@
         <!-- Copyright -->
 
         </footer>
+        <script>
+            $(document).ready(function(){
+              
+                $('#search_animals').keyup(function(){
+                    load_data();
+
+                        function load_data(query){
+                            $.ajax({
+                                url:"fetch.php",
+                                method:"POST",
+                                data:{query:query},
+                                success:function(data)
+                                {
+                                    $('#result').html(data);
+                                }
+                            });
+                            var search = $(this).val();
+                            if(search != '')
+                            {
+                                load_data(search);
+                            }
+                            else
+                            {
+                                load_data();
+                            }
+                        };
+                });
+            });
+        
+        
+        </script>
     </body>
 </html>

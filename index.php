@@ -123,7 +123,7 @@ if( isset($_POST['btn-login']) ) {
                         <button type="submit" class="btn btn-secondary" name="btn-login">Log-In</button>
                     </div>
                         <hr/>
-                        <a class="text-white" href="registration.php">Sign Up Here...</a>
+                        <a class="text-white" href="registration.php">Not registered yet? Sign Up Here...</a>
                 </form>
             </div>
         </div>
