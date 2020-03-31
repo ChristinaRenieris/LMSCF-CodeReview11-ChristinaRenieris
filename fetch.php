@@ -21,6 +21,9 @@
             OR `date` LIKE '%".$search."%'
                     ");
                     // echo $result;
+
+
+                    //HERE STARTS THE PROBLEM....
         if(mysqli_num_rows($result) > 0 ){
             echo $result;
             $output = '<div class="h4 text-center p-3">Search Results</div>';
