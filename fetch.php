@@ -20,10 +20,12 @@
             OR `hobbies` LIKE '%".$search."%'
             OR `date` LIKE '%".$search."%'
                     ");
-
+                    // echo $result;
         if(mysqli_num_rows($result) > 0 ){
-            $output .= '<div class="h4 text-center p-3">Search Results</div>';
+            echo $result;
+            $output = '<div class="h4 text-center p-3">Search Results</div>';
             while($row = mysqli_num_rows($result) > 0) {
+                echo $row;
                 if ( $row['type'] == "small") {
                     $output .= '<div class="col-xl-3  col-lg-4 col-md-6 col-sm-12 mb-3 d-flex alight-items-stretch">
                                 <div class="card w-100">
